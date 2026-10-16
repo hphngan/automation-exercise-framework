@@ -22,7 +22,11 @@ def test_open_product_details(browser):
 
     page.open().open_product_details(product_id=1)
 
-    assert page.product_name() == "Blue Top"
+    # assert page.product_name() == "Blue Top"
+    
+    # This assertion is intentionally incorrect to demonstrate a failing test
+    assert page.product_name() == "Wrong Product Name"  
+    
     details = page.product_information()
     assert "Category: Women > Tops" in details
     assert "Availability: In Stock" in details
