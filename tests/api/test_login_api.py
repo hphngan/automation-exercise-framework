@@ -22,6 +22,18 @@ def test_invalid_login(user_api):
     assert data["message"] == "User not found!"
 
 
+def test_login_with_wrong_password(user_api, created_user):
+    response = user_api.verify_login(
+        created_user["email"],
+        f"{created_user['password']}-wrong",
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["responseCode"] == 404
+    assert data["message"] == "User not found!"
+
+
 def test_login_without_email(user_api):
     response = user_api.verify_login(password="password-only")
 
